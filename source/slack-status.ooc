@@ -6,9 +6,6 @@ import io/FileReader
 ENV_FILE := "env.props"
 
 main: func (args: ArrayList<String>) {
-    if (args size < 3) {
-        exit(0)
-    }
     fr := FileReader new(ENV_FILE)
     token: String
 
@@ -23,6 +20,10 @@ main: func (args: ArrayList<String>) {
 
     if (token) {
         slack := Slack new(token)
-        slack setUserProfile(args[1], args[2]) println()
+        if (args size < 3) {
+            slack getUserProfile() println()
+        } else {
+            slack setUserProfile(args[1], args[2]) println()
+        }
     }
 }

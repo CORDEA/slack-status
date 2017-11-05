@@ -3,7 +3,8 @@ import text/json/DSL into JSON
 import curl/Highlevel
 
 BASE_URL := "https://slack.com/api/"
-USER_PROFILE_PATH := "users.profile.set"
+USER_PROFILE_GET_PATH := "users.profile.get"
+USER_PROFILE_SET_PATH := "users.profile.set"
 
 PROFILE := "profile"
 STATUS_TEXT := "status_text"
@@ -24,8 +25,16 @@ Slack: class {
         )
     }
 
+    getUserProfile: func -> String {
+        url := "#{BASE_URL}#{USER_PROFILE_GET_PATH}?token=#{token}"
+        handle := HTTPRequest new(url)
+        handle perform()
+
+        return handle getString()
+    }
+
     setUserProfile: func (text, emoji: String)  -> String {
-        handle := HTTPRequest new(BASE_URL + USER_PROFILE_PATH)
+        handle := HTTPRequest new(BASE_URL + USER_PROFILE_SET_PATH)
         data := FormData new()
         data addField(TOKEN, token)
         data addField(PROFILE, getPayload(text, emoji))
