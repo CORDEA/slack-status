@@ -1,0 +1,6 @@
+Name: Slack status
+Description: Slack status manager.
+Version: 0.1.0
+SourcePath: source
+Main: slack-status
+Requires: curl
