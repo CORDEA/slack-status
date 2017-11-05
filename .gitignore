@@ -1,0 +1,5 @@
+.libs/
+*.dSYM/
+rock_tmp/
+env.props
+slack-status
