@@ -1,4 +1,4 @@
-import slack/Slack
+import slack/[Slack, Status]
 import text/StringTokenizer
 import structs/ArrayList
 import io/FileReader
@@ -21,9 +21,9 @@ main: func (args: ArrayList<String>) {
     if (token) {
         slack := Slack new(token)
         if (args size < 3) {
-            slack getUserProfile() println()
+            slack getUserProfile() toString() println()
         } else {
-            slack setUserProfile(args[1], args[2]) println()
+            slack setUserProfile(args[1], args[2]) toString() println()
         }
     }
 }
